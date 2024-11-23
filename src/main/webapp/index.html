@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <style>
+        /* 全屏动态背景 */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(120deg, #2b1055, #7597de);
+            overflow: hidden;
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+
+        @keyframes stars {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-2000px);
+            }
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 2000px;
+            background: transparent;
+            z-index: -1;
+            animation: stars 20s linear infinite;
+        }
+
+        .stars:after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(#ffffff 1px, transparent 1px);
+            background-size: 2px 2px;
+            opacity: 0.6;
+        }
+
+        /* 半透明玻璃效果卡片 */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .btn-group a {
+            display: inline-block;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #ff8a00, #da1b60);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-group a:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* 语言切换按钮 */
+        .language-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .language-switch button {
+            background: linear-gradient(45deg, #56ccf2, #2f80ed);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .language-switch button:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #2f80ed, #56ccf2);
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <!-- 动态星空背景 -->
+    <div class="stars"></div>
+
+    <div class="container">
+        <!-- 语言切换按钮 -->
+        <div class="language-switch">
+            <button id="lang-switch">语言 / Language</button>
+        </div>
+
+        <h1>#(i18n.get("welcome"))</h1>
+        <p class="lead">#(i18n.get("selectModule"))</p>
+        <div class="btn-group d-flex justify-content-center mt-4">
+            <a href="/user/list">#(i18n.get("userManagement"))</a>
+            <a href="/product/list">#(i18n.get("productManagement"))</a>
+            <a href="/order/list">#(i18n.get("orderManagement"))</a>
+        </div>
+        <footer>
+            <p>&copy; 2024 陈华栋 吴永城</p>
+        </footer>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#lang-switch').click(function () {
+                const currentLang = window.location.search.includes('lang=zh') ? 'zh' : 'en';
+                const newLang = currentLang === 'zh' ? 'en' : 'zh';
+                window.location.href = '/index?lang=' + newLang;
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
